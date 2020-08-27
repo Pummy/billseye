@@ -18,6 +18,9 @@
   position: absolute;
   top: 4px;
 }
+.btn-primary.dropdown-toggle{
+  background-color: unset !important;
+}
 .sidebar {
   min-height: calc(100vh - #{$navbar-height});
   background: $sidebar-light-bg;

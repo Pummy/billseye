@@ -7,7 +7,7 @@ class Navbar extends Component {
   }
   render () { 
     return (
-      <nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+      <nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row" style={{boxShadow: "none"}}>
         <div className="navbar-menu-wrapper d-flex align-items-center justify-content-between">
           {/* <a className="navbar-brand brand-logo-mini align-self-center d-lg-none" href="!#" onClick={evt =>evt.preventDefault()}><img src={require("../../assets/images/logo-mini.svg")} alt="logo" /></a>
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick={ () => document.body.classList.toggle('sidebar-icon-only') }>

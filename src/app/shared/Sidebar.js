@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Collapse } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown,Collapse } from 'react-bootstrap';
 
 class Sidebar extends Component {
   state = {};
@@ -59,7 +58,7 @@ class Sidebar extends Component {
           <li className="nav-item nav-profile not-navigation-link">
             <div className="nav-link">
               <Dropdown>
-                <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100">
+                <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100" style={{backgroundColor:"unset !important"}}>
                   <div className="profile-image">
                     <img src={ require("../../assets/images/faces/Sabrina.png")} alt="profile" />
                     <div className="bordershadow">

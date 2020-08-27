@@ -17,6 +17,7 @@ const FontAwesome = lazy(() => import('./icons/FontAwesome'));
 
 
 const ChartJs = lazy(() => import('./charts/ChartJs'));
+const Calllog = lazy(() => import('./calllog/calllog'));
 
 const Error404 = lazy(() => import('./user-pages/Error404'));
 const Error500 = lazy(() => import('./user-pages/Error500'));
@@ -45,6 +46,7 @@ class AppRoutes extends Component {
           <Route path="/icons/font-awesome" component={ FontAwesome } />
 
           <Route path="/charts/chart-js" component={ ChartJs } />
+          <Route path="/calllog/calllog-js" component={ Calllog } />
 
 
           <Route path="/user-pages/login-1" component={ Login } />

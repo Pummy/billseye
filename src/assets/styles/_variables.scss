@@ -179,8 +179,9 @@ $icon-only-menu-bg-dark: $sidebar-dark-bg;
 ///////// NAVBAR ////////
 
 $navbar-height: 63px;
-$navbar-bg: linear-gradient(120deg, #2f78e9, #128bfc, #18bef1);
-$navbar-menu-color: #fff;
+// $navbar-bg: linear-gradient(120deg, #2f78e9, #128bfc, #18bef1);
+$navbar-bg: linear-gradient(120deg, #ffffff, #ffffff, #fbfbfb);
+$navbar-menu-color: #18bef1;
 $navbar-font-size: 12px;
 $navbar-icon-font-size: 1.25rem;
 $nvabar-brand-bg: #000000; 

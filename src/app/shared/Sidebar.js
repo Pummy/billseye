@@ -37,6 +37,7 @@ class Sidebar extends Component {
       {path:'/tables', state: 'tablesMenuOpen'},
       {path:'/icons', state: 'iconsMenuOpen'},
       {path:'/charts', state: 'chartsMenuOpen'},
+      {path:'/calllog', state: 'calllogMenuOpen'},
       {path:'/user-pages', state: 'userPagesMenuOpen'},
     ];
 
@@ -51,7 +52,7 @@ class Sidebar extends Component {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a className="sidebar-brand brand-logo" href="index.html"><img src={require("../../assets/images/logo.svg")} alt="logo" /></a>
+          <a className="sidebar-brand brand-logo" href="index.html"><img src={require("../../assets/images/favicon.png")} alt="logo"/><h4 class="text-left ml-3">BillsEye</h4></a>
           <a className="sidebar-brand brand-logo-mini pt-3" href="index.html"><img src={require("../../assets/images/logo-mini.svg" )} alt="logo" /></a>
         </div>
         <ul className="nav">
@@ -59,14 +60,18 @@ class Sidebar extends Component {
             <div className="nav-link">
               <Dropdown>
                 <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100">
-                  <div className="d-flex justify-content-between align-items-start">
-                    <div className="profile-image">
-                      <img src={ require("../../assets/images/faces/face8.jpg")} alt="profile" />
+                  <div className="profile-image">
+                    <img src={ require("../../assets/images/faces/Sabrina.png")} alt="profile" />
+                    <div className="bordershadow">
+                      <i className="mdi mdi-pencil menu-icon mleft"></i>
                     </div>
-                    <div className="text-left ml-3">
-                      <p className="profile-name">Richard V.Welsh</p>
-                      <small className="designation text-muted text-small">Manager</small>
-                      <span className="status-indicator online"></span>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-start">
+                    
+                    <div className="text-left">
+                      <p className="profile-name">Sabrina Yerin Hong</p>
+                      {/* <small className="designation text-muted text-small">Manager</small>
+                      <span className="status-indicator online"></span> */}
                     </div>
                   </div>
                 </Dropdown.Toggle>
@@ -98,16 +103,16 @@ class Sidebar extends Component {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <button className="btn btn-success btn-block">New Project <i className="mdi mdi-plus"></i></button>
+              {/* <button className="btn btn-success btn-block">New Project <i className="mdi mdi-plus"></i></button> */}
             </div>
           </li>
           <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/dashboard">
-              <i className="mdi mdi-television menu-icon"></i>
-              <span className="menu-title">Dashboard</span>
+              <i className="mdi mdi-clock menu-icon"></i>
+              <span className="menu-title">Call Log</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
+          {/* <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.basicUiMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicUiMenuOpen') } data-toggle="collapse">
               <i className="mdi mdi-crosshairs-gps menu-icon"></i>
               <span className="menu-title">Basic UI Elements</span>
@@ -120,32 +125,32 @@ class Sidebar extends Component {
                 <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/typography') ? 'nav-link active' : 'nav-link' } to="/basic-ui/typography">Typography</Link></li>
               </ul>
             </Collapse>
-          </li>
+          </li> */}
           <li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/form-elements/basic-elements">
-              <i className="mdi mdi-format-list-bulleted menu-icon"></i>
-              <span className="menu-title">Form Elements</span>
+              <i className="mdi mdi-export menu-icon"></i>
+              <span className="menu-title">Export</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/tables') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/tables/basic-table">
-              <i className="mdi mdi-table-large menu-icon"></i>
-              <span className="menu-title">Tables</span>
+              <i className="mdi mdi-flash menu-icon"></i>
+              <span className="menu-title">Integrate</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/icons/font-awesome">
-              <i className="mdi mdi-account-box-outline menu-icon"></i>
-              <span className="menu-title">Icons</span>
+              <i className="mdi mdi-video menu-icon"></i>
+              <span className="menu-title">Video Call</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/charts') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/charts/chart-js">
-              <i className="mdi mdi-chart-line menu-icon"></i>
-              <span className="menu-title">Charts</span>
+              <i className="mdi mdi-account-circle menu-icon"></i>
+              <span className="menu-title">Contacts</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item' }>
+          {/* <li className={ this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('userPagesMenuOpen') } data-toggle="collapse">
               <i className="mdi mdi-lock-outline menu-icon"></i>
               <span className="menu-title">User Pages</span>
@@ -160,14 +165,31 @@ class Sidebar extends Component {
                 <li className="nav-item"> <Link className={ this.isPathActive('/user-pages/error-500') ? 'nav-link active' : 'nav-link' } to="/user-pages/error-500">500</Link></li>
               </ul>
             </Collapse>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="http://www.bootstrapdash.com/demo/star-admin-free/react/documentation/documentation.html" rel="noopener noreferrer" target="_blank">
-              <i className="mdi mdi-file-outline menu-icon"></i>
-              <span className="menu-title">Documentation</span>
-            </a>
+          </li> */}
+          <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/basic-ui/buttons">
+              <i className="mdi mdi-chart-bar menu-icon"></i>
+              <span className="menu-title">Analytics</span>
+            </Link>
           </li>
         </ul>
+        {/* <div className="marignbottom">
+          <ul className="nav">
+            <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
+              <Link className="nav-link" to="/basic-ui/buttons">
+                <i className="mdi mdi-chart-bar menu-icon"></i>
+                <span className="menu-title">Analytics</span>
+              </Link>
+            </li>
+            <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
+              <Link className="nav-link" to="/basic-ui/buttons">
+                <i className="mdi mdi-chart-bar menu-icon"></i>
+                <span className="menu-title">Analytics</span>
+              </Link>
+            </li>
+          </ul>
+        </div> */}
+        
       </nav>
     );
   }

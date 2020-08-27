@@ -9,7 +9,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
         <div className="navbar-menu-wrapper d-flex align-items-center justify-content-between">
-        <a className="navbar-brand brand-logo-mini align-self-center d-lg-none" href="!#" onClick={evt =>evt.preventDefault()}><img src={require("../../assets/images/logo-mini.svg")} alt="logo" /></a>
+          {/* <a className="navbar-brand brand-logo-mini align-self-center d-lg-none" href="!#" onClick={evt =>evt.preventDefault()}><img src={require("../../assets/images/logo-mini.svg")} alt="logo" /></a>
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick={ () => document.body.classList.toggle('sidebar-icon-only') }>
             <i className="mdi mdi-menu"></i>
           </button>
@@ -26,8 +26,8 @@ class Navbar extends Component {
               <a href="!#" onClick={evt =>evt.preventDefault()} className="nav-link">
                 <i className="mdi mdi-bookmark-plus-outline"></i>Score</a>
             </li>
-          </ul>
-          <ul className="navbar-nav navbar-nav-right ml-lg-auto">
+          </ul> */}
+          {/* <ul className="navbar-nav navbar-nav-right ml-lg-auto">
             <li className="nav-item  nav-profile border-0">
               <Dropdown alignRight>
                 <Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">
@@ -148,8 +148,8 @@ class Navbar extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             </li>
-          </ul>
-          <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={this.toggleOffcanvas}>
+          </ul>*/}
+          <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={this.toggleOffcanvas}> 
             <span className="mdi mdi-menu"></span>
           </button>
         </div>

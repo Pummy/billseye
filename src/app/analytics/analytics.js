@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBadge, MDBDataTableV5 } from 'mdbreact';
 import SectionContainer from '../components/sectionContainer';
 
-class Calllog extends Component {
+class Analytics extends Component {
   state = {
     data: {
       columns: [
@@ -566,4 +566,4 @@ class Calllog extends Component {
   }
 }
 
-export default Calllog;
+export default Analytics;

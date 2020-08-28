@@ -1,4 +1,13 @@
 /* Sidebar */
+li.nav-item.active {
+  background: #7BAFFD;
+  box-shadow: 0px 0px 15px rgba(123, 175, 253, 0.5);
+  border-radius: 0 10px 10px 0;
+  height: 40px;
+}
+li.nav-item.active a.nav-link{
+  color: #FFFFFF !important;
+}
 .marignbottom{
   clear: both;
   position: relative;
@@ -42,6 +51,7 @@
       display: flex;
       margin: 0 auto;
       text-decoration: none;
+      margin-left: 15%;
       .rtl & {
         padding: 20px 61px 10px 0;
       }

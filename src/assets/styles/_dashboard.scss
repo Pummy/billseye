@@ -3,6 +3,14 @@
   box-shadow:unset !important;
   background-color: unset;
 }
+.btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show>.btn-primary.dropdown-toggle{
+  background-color: unset !important;
+
+}
+.btn-primary.dropdown-toggle:hover, .btn-primary.dropdown-toggle:focus{
+  background-color: unset !important;
+
+}
 .mdb-dataTable-head tr{
   background: #FFFFFF;
   box-shadow: 5px 5px 15px rgba(218, 218, 218, 0.5);

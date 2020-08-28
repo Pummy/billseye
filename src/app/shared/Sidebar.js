@@ -58,7 +58,7 @@ class Sidebar extends Component {
           <li className="nav-item nav-profile not-navigation-link">
             <div className="nav-link">
               <Dropdown>
-                <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100" style={{backgroundColor:"unset !important"}}>
+                <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100">
                   <div className="profile-image">
                     <img src={ require("../../assets/images/faces/Sabrina.png")} alt="profile" />
                     <div className="bordershadow">
@@ -105,8 +105,8 @@ class Sidebar extends Component {
               {/* <button className="btn btn-success btn-block">New Project <i className="mdi mdi-plus"></i></button> */}
             </div>
           </li>
-          <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/dashboard">
+          <li className={ this.isPathActive('/calllog') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/calllog">
               <i className="mdi mdi-clock menu-icon"></i>
               <span className="menu-title">Call Log</span>
             </Link>
@@ -125,26 +125,26 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
           </li> */}
-          <li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/form-elements/basic-elements">
+          <li className={ this.isPathActive('/exports') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/exports">
               <i className="mdi mdi-export menu-icon"></i>
               <span className="menu-title">Export</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/tables') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/tables/basic-table">
+          <li className={ this.isPathActive('/integrate') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/integrate">
               <i className="mdi mdi-flash menu-icon"></i>
               <span className="menu-title">Integrate</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/icons/font-awesome">
+          <li className={ this.isPathActive('/videocall') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/videocall">
               <i className="mdi mdi-video menu-icon"></i>
               <span className="menu-title">Video Call</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/charts') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/charts/chart-js">
+          <li className={ this.isPathActive('/contacts') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/contacts">
               <i className="mdi mdi-account-circle menu-icon"></i>
               <span className="menu-title">Contacts</span>
             </Link>
@@ -165,8 +165,8 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
           </li> */}
-          <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/basic-ui/buttons">
+          <li className={ this.isPathActive('/analytics') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/analytics">
               <i className="mdi mdi-chart-bar menu-icon"></i>
               <span className="menu-title">Analytics</span>
             </Link>

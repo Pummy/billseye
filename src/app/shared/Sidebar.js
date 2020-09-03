@@ -172,12 +172,6 @@ class Sidebar extends Component {
               <span className="menu-title">Analytics</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/expandrow') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/expandrow">
-              <i className="mdi mdi-poll-box menu-icon"></i>
-              <span className="menu-title">Expand Row</span>
-            </Link>
-          </li>
         </ul>
         {/* <div className="marignbottom">
           <ul className="nav">

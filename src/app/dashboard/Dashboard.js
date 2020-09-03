@@ -12,7 +12,8 @@ class Dashboard extends Component {
           width: 150,
           attributes: {
             'aria-controls': 'DataTable',
-            'aria-label': 'Name'
+            'aria-label': 'Name',
+            'class':'balram'
           }
         },
         {

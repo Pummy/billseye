@@ -17,6 +17,8 @@ const Contacts = lazy(() => import('./contacts/contacts'));
 
 const Analytics = lazy(() => import('./analytics/analytics'));
 
+const Expandrow=lazy(()=>import('./expandrow/expandrow'));
+
 class AppRoutes extends Component {
   render () {
     return (
@@ -36,6 +38,8 @@ class AppRoutes extends Component {
 
           <Route path="/analytics" component={ Analytics } />
 
+          <Route path="/expandrow" component={ Expandrow } />
+          
           <Redirect to="/calllog" />
         </Switch>
       </Suspense>

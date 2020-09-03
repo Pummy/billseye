@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBadge, MDBDataTableV5, MDBIcon } from 'mdbreact';
 import { Link, withRouter } from 'react-router-dom';
 import { Dropdown,Collapse } from 'react-bootstrap';
 
@@ -107,7 +108,7 @@ class Sidebar extends Component {
           </li>
           <li className={ this.isPathActive('/calllog') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/calllog">
-              <i className="mdi mdi-clock menu-icon"></i>
+              <i className="mdi mdi-clock-outline menu-icon"></i>
               <span className="menu-title">Call Log</span>
             </Link>
           </li>
@@ -127,25 +128,25 @@ class Sidebar extends Component {
           </li> */}
           <li className={ this.isPathActive('/exports') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/exports">
-              <i className="mdi mdi-export menu-icon"></i>
+              <i className="mdi mdi-folder-move menu-icon"></i>
               <span className="menu-title">Export</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/integrate') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/integrate">
-              <i className="mdi mdi-flash menu-icon"></i>
+              <i className="mdi mdi-flash-outline menu-icon"></i>
               <span className="menu-title">Integrate</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/videocall') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/videocall">
-              <i className="mdi mdi-video menu-icon"></i>
+              <i className="mdi mdi-video-outline menu-icon"></i>
               <span className="menu-title">Video Call</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/contacts') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/contacts">
-              <i className="mdi mdi-account-circle menu-icon"></i>
+              <i className="mdi mdi-account-circle-outline menu-icon"></i>
               <span className="menu-title">Contacts</span>
             </Link>
           </li>
@@ -167,8 +168,14 @@ class Sidebar extends Component {
           </li> */}
           <li className={ this.isPathActive('/analytics') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/analytics">
-              <i className="mdi mdi-chart-bar menu-icon"></i>
+              <i className="mdi mdi-poll-box menu-icon"></i>
               <span className="menu-title">Analytics</span>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/expandrow') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/expandrow">
+              <i className="mdi mdi-poll-box menu-icon"></i>
+              <span className="menu-title">Expand Row</span>
             </Link>
           </li>
         </ul>

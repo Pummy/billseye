@@ -12,7 +12,8 @@ class Calllog extends Component {
           width: 150,
           attributes: {
             'aria-controls': 'DataTable',
-            'aria-label': 'Name'
+            'aria-label': 'Name',
+            'className':'balram'
           }
         },
         {
@@ -547,8 +548,8 @@ class Calllog extends Component {
                 <MDBCardBody>
                   <MDBDataTableV5
                     hover
-                    entriesOptions={[5, 20, 25]}
-                    entries={5}
+                    entriesOptions={[5,15,25]}
+                    entries={10}
                     pagesAmount={4}
                     data={data}
                     pagingTop

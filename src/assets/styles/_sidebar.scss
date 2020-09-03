@@ -1,4 +1,34 @@
 /* Sidebar */
+
+.sidebar .nav .nav-item .nav-link :not(.mleft):hover .menu-icon ,.sidebar .nav .nav-item .nav-link :not(.mleft):focus .menu-icon {
+  color: #FFFFFF !important;
+}
+
+.table tr {
+    cursor: pointer;
+}
+.table{
+	background-color: #fff !important;
+}
+.hedding h1{
+	color:#fff;
+	font-size:25px;
+}
+.main-section{
+	margin-top: 120px;
+}
+.hiddenRow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}
+.accordian-body span{
+	color:#a2a2a2 !important;
+}
+
+
+
+
 li.nav-item.active {
   background: #7BAFFD;
   box-shadow: 0px 0px 15px rgba(123, 175, 253, 0.5);
@@ -26,6 +56,8 @@ li.nav-item.active a.nav-link{
   left: 4px;
   position: absolute;
   top: 4px;
+  color: rgba(123, 175, 253, 0.5) !important;
+  
 }
 .btn-primary.dropdown-toggle{
   background-color: unset !important;

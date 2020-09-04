@@ -5,8 +5,12 @@ import '../../assets/styles/calllog.scss';
 
 
 class BSTable extends React.Component {
+  
     customHeaderClass() {
         return 'custom-header-class';
+    }
+    customInputClass() {
+      return 'input-voice';
     }
     trClassFormat() {
         // row is the current row data
@@ -14,9 +18,9 @@ class BSTable extends React.Component {
     }
   render() {
     const selectRow = {
-        mode: 'radio'  // single select
+        mode: 'radio',  // single select
+        insertText: 'Custom Insert Text'
     };
-    
     if (this.props.data) {
       return (
         <BootstrapTable data={ this.props.data } bordered={ false } tableBodyClass='my-expand' 
@@ -25,21 +29,26 @@ class BSTable extends React.Component {
             <i class="mdi mdi-phone-outline"></i>
             <span className="menu-title">Call</span>
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldB' className={ this.customHeaderClass }>
+          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
             <i class="mdi mdi-video-outline"></i>
             <span className="menu-title">Video Call</span>
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldC' className={ this.customHeaderClass }>
+          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
             <i class="mdi mdi-email-outline"></i>
             <span className="menu-title">Email</span>
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldD' className={ this.customHeaderClass }>
+          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
             <i class="mdi mdi-comment-outline"></i>
             <span className="menu-title">Message</span>
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldD' isKey={ true } className={ this.customHeaderClass }>
+          <TableHeaderColumn dataField='fieldB' isKey={ true } className={ this.customHeaderClass }>
             <i class="mdi mdi-account-plus-outline"></i>
             <span className="menu-title">Add Contact</span>
+          </TableHeaderColumn>
+          <TableHeaderColumn dataField='' className={ this.customInputClass }>
+            <div className="voicechat">
+              <input className="inputstyle"/>
+            </div>
           </TableHeaderColumn>
           
           
@@ -102,7 +111,7 @@ export default class Calllog extends React.Component {
           ],
           rows: [
             {
-              name: 'Tiger Nixon',
+              name: 'Logan Ellis',
               position: 'System Architect',
               office: 'Edinburgh',
               age: '61',
@@ -111,24 +120,16 @@ export default class Calllog extends React.Component {
               salary: '$30',
               expand: [ {
                 fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM',
-                fieldC: 20 * 100,
-                fieldD: '123eedd'
+                fieldB: '06/26/20 10:35 AM'
               }, {
                 fieldA: '5 m, 12 s',
-                fieldB: 30 * 99,
-                fieldC: 30 * 100,
-                fieldD: '123eedd'
+                fieldB: '06/26/20 10:35 AM'
               }, {
                 fieldA: '3 m, 47 s',
-                fieldB: 30 * 99,
-                fieldC: 30 * 100,
-                fieldD: '123eedd'
+                fieldB: '06/26/20 10:35 AM'
               }, {
                 fieldA: 'Sign Document',
-                fieldB: 30 * 99,
-                fieldC: 30 * 100,
-                fieldD: '123eedd'
+                fieldB: '06/26/20 10:35 AM'
               } ]
             },
             {
@@ -655,6 +656,9 @@ export default class Calllog extends React.Component {
     );
   }
 
+  userPic(cell, row) {   // String example
+    return `<img src=${ require("../../assets/images/logan.png")} alt="userPic" class="userPic"/> ${cell}<p class="userPhone">(123) 456-7890</p>`;
+  }
   render() {
     const options = {
       expandRowBgColor: '#fff',
@@ -668,7 +672,7 @@ export default class Calllog extends React.Component {
         pagination
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent } trClassName={ this.trClassFormat }>
-        <TableHeaderColumn dataField='name' isKey={ true } width="150" dataSort={ true } className={ this.customtdallClass }>Callers</TableHeaderColumn>
+        <TableHeaderColumn dataField='name' isKey={ true } width="150" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userPic}>Callers</TableHeaderColumn>
         <TableHeaderColumn dataField='position' width="270" dataSort={ true } className={ this.customtdallClass }> Call Status</TableHeaderColumn>
         <TableHeaderColumn dataField='date' width="150" dataSort={ true } className={ this.customtdallClass }>Time & Date</TableHeaderColumn>
         <TableHeaderColumn dataField='age' width="100" dataSort={ true } className={ this.customtdallClass }>Duration</TableHeaderColumn>

@@ -5,59 +5,73 @@ import '../../assets/styles/calllog.scss';
 
 
 class BSTable extends React.Component {
+
+  customHeaderClass() {
+      return 'custom-header-class';
+  }
   
-    customHeaderClass() {
-        return 'custom-header-class';
-    }
-    customInputClass() {
-      return 'input-voice';
-    }
-    trClassFormat() {
-        // row is the current row data
-        return "custom-trall-expand";  // return class name.
-    }
+  trClassFormat() {
+      // row is the current row data
+      return "custom-trall-expand";  // return class name.
+  }
+  userFieldA(cell, row) {
+    return `<span class="alarmoff"><i class="mdi mdi-alarm-off"></i></span> ${cell}`;
+  }
+  
   render() {
     const selectRow = {
         mode: 'radio',  // single select
-        insertText: 'Custom Insert Text'
     };
     if (this.props.data) {
       return (
-        <BootstrapTable data={ this.props.data } bordered={ false } tableBodyClass='my-expand' 
-        selectRow={ selectRow } trClassName={ this.trClassFormat }>
-          <TableHeaderColumn dataField='fieldA' className={ this.customHeaderClass }>
-            <i class="mdi mdi-phone-outline"></i>
-            <span className="menu-title">Call</span>
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
-            <i class="mdi mdi-video-outline"></i>
-            <span className="menu-title">Video Call</span>
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
-            <i class="mdi mdi-email-outline"></i>
-            <span className="menu-title">Email</span>
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
-            <i class="mdi mdi-comment-outline"></i>
-            <span className="menu-title">Message</span>
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='fieldB' isKey={ true } className={ this.customHeaderClass }>
-            <i class="mdi mdi-account-plus-outline"></i>
-            <span className="menu-title">Add Contact</span>
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='' className={ this.customInputClass }>
-            <div className="voicechat">
-              <input className="inputstyle"/>
+        <div>
+          <div>
+            <BootstrapTable data={ this.props.data } bordered={ false } tableBodyClass='my-expand' 
+          selectRow={ selectRow } trClassName={ this.trClassFormat }>
+              <TableHeaderColumn dataField='fieldA' className={ this.customHeaderClass }>
+                <i class="mdi mdi-phone-outline"></i>
+                <span className="menu-title">Call</span>
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
+                <i class="mdi mdi-video-outline"></i>
+                <span className="menu-title">Video Call</span>
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
+                <i class="mdi mdi-email-outline"></i>
+                <span className="menu-title">Email</span>
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField='' className={ this.customHeaderClass }>
+                <i class="mdi mdi-comment-outline"></i>
+                <span className="menu-title">Message</span>
+              </TableHeaderColumn>
+              <TableHeaderColumn dataField='fieldB' isKey={ true } className={ this.customHeaderClass }>
+                <i class="mdi mdi-account-plus-outline"></i>
+                <span className="menu-title">Add Contact</span>
+              
+              </TableHeaderColumn>
+            </BootstrapTable>
+    
+          </div>
+          <div>
+            <div className="inputvoice">
+              <div className="voicechat">
+                <input className="inputstyle" placeholder="Press to Talk"/>
+                <span>
+                  <i class="mdi mdi-microphone-settings"></i>
+                </span>
+                <span className="icuploader">
+                  <i class="mdi mdi-arrow-up-bold-circle"></i>
+                </span>
+              </div>
             </div>
-          </TableHeaderColumn>
-          
-          
-        </BootstrapTable>);
+          </div>
+        </div>);
     } else {
       return (<p>?</p>);
     }
   }
 }
+
 
 export default class Calllog extends React.Component {
 
@@ -70,13 +84,12 @@ export default class Calllog extends React.Component {
               width: 150,
               attributes: {
                 'aria-controls': 'DataTable',
-                'aria-label': 'Name',
-                'className':'balram'
+                'aria-label': 'Name'
               }
             },
             {
               label: 'Call Status',
-              field: 'position',
+              field: 'callstatus',
               width: 270
             },
             {
@@ -87,37 +100,39 @@ export default class Calllog extends React.Component {
             },
             {
               label: 'Duration',
-              field: 'age',
+              field: 'duration',
               sort: 'asc',
               width: 100
             },
             {
               label: 'Bill Status',
-              field: 'office',
+              field: 'billstatus',
               width: 200
             },
             {
               label: 'Fee',
-              field: 'salary',
+              field: 'fee',
               sort: 'disabled',
               width: 100
             },
             {
               label: 'Rate',
-              field: 'salary',
+              field: 'rate',
               sort: 'disabled',
               width: 100
             }
           ],
           rows: [
             {
-              name: 'Logan Ellis',
-              position: 'System Architect',
-              office: 'Edinburgh',
-              age: '61',
-              date: '2011/04/25',
-              salary: '$20',
-              salary: '$30',
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
               expand: [ {
                 fieldA: 'Leave him a text about the coffee project...',
                 fieldB: '06/26/20 10:35 AM'
@@ -133,504 +148,1324 @@ export default class Calllog extends React.Component {
               } ]
             },
             {
-              name: 'Garrett Winters',
-              position: 'Accountant',
-              office: 'Tokyo',
-              age: '63',
-              date: '2011/07/25',
-              salary: '$170',
-              salary: '$320',
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
               expand: [ {
-                fieldA: 'test1',
-                fieldB:  170*99,
-                fieldC:  170*100,
-                fieldD: '123eedd'
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
               }, {
-                fieldA: 'test2',
-                fieldB:  320 * 99,
-                fieldC: 320 * 100,
-                fieldD: '123eedd' + 2
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
               } ]
             },
             {
-              name: 'Ashton Cox',
-              position: 'Junior Technical Author',
-              office: 'San Francisco',
-              age: '66',
-              date: '2009/01/12',
-              salary: '$86',
-              salary: '$86'
-            },
-            {
-              name: 'Cedric Kelly',
-              position: 'Senior Javascript Developer',
-              office: 'Edinburgh',
-              age: '22',
-              date: '2012/03/29',
-              salary: '$433',
-              salary: '$86',
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
               expand: [ {
-                fieldA: 'test1',
-                fieldB: 20 * 99,
-                fieldC: 20 * 100,
-                fieldD: '123eedd'
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
               }, {
-                fieldA: 'test2',
-                fieldB: 30 * 99,
-                fieldC: 30 * 100,
-                fieldD: '123eedd'
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
               } ]
             },
             {
-              name: 'Airi Satou',
-              position: 'Accountant',
-              office: 'Tokyo',
-              age: '33',
-              date: '2008/11/28',
-              salary: '$162',
-              salary: '$86',
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
               expand: [ {
-                fieldA: 'test1',
-                fieldB: 20 * 99,
-                fieldC: 20 * 100,
-                fieldD: '123eedd'
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
               }, {
-                fieldA: 'test2',
-                fieldB: 30 * 99,
-                fieldC: 30 * 100,
-                fieldD: '123eedd'
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
               } ]
             },
             {
-              name: 'Brielle Williamson',
-              position: 'Integration Specialist',
-              office: 'New York',
-              age: '61',
-              date: '2012/12/02',
-              salary: '$372',
-              salary: '$86'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Herrod Chandler',
-              position: 'Sales Assistant',
-              office: 'San Francisco',
-              age: '59',
-              date: '2012/08/06',
-              salary: '$137',
-              salary: '$86'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Rhona Davidson',
-              position: 'Integration Specialist',
-              office: 'Tokyo',
-              age: '55',
-              date: '2010/10/14',
-              salary: '$327',
-              salary: '$86'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Colleen Hurst',
-              position: 'Javascript Developer',
-              office: 'San Francisco',
-              age: '39',
-              date: '2009/09/15',
-              salary: '$205',
-              salary: '$86'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Sonya Frost',
-              position: 'Software Engineer',
-              office: 'Edinburgh',
-              age: '23',
-              date: '2008/12/13',
-              salary: '$103',
-              salary: '$86'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jena Gaines',
-              position: 'Office Manager',
-              office: 'London',
-              age: '30',
-              date: '2008/12/19',
-              salary: '$90',
-              salary: '$86'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Quinn Flynn',
-              position: 'Support Lead',
-              office: 'Edinburgh',
-              age: '22',
-              date: '2013/03/03',
-              salary: '$342',
-              salary: '$86'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Charde Marshall',
-              position: 'Regional Director',
-              office: 'San Francisco',
-              age: '36',
-              date: '2008/10/16',
-              salary: '$470',
-              salary: '$86'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Haley Kennedy',
-              position: 'Senior Marketing Designer',
-              office: 'London',
-              age: '43',
-              date: '2012/12/18',
-              salary: '$313',
-              salary: '$86'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Tatyana Fitzpatrick',
-              position: 'Regional Director',
-              office: 'London',
-              age: '19',
-              date: '2010/03/17',
-              salary: '$385',
-              salary: '$86'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Michael Silva',
-              position: 'Marketing Designer',
-              office: 'London',
-              age: '66',
-              date: '2012/11/27',
-              salary: '$198',
-              salary: '$86'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Paul Byrd',
-              position: 'Chief Financial Officer (CFO)',
-              office: 'New York',
-              age: '64',
-              date: '2010/06/09',
-              salary: '$725',
-              salary: '$86'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Gloria Little',
-              position: 'Systems Administrator',
-              office: 'New York',
-              age: '59',
-              date: '2009/04/10',
-              salary: '$237',
-              salary: '$86'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Bradley Greer',
-              position: 'Software Engineer',
-              office: 'London',
-              age: '41',
-              date: '2012/10/13',
-              salary: '$132',
-              salary: '$86'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Dai Rios',
-              position: 'Personnel Lead',
-              office: 'Edinburgh',
-              age: '35',
-              date: '2012/09/26',
-              salary: '$217',
-              salary: '$86'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jenette Caldwell',
-              position: 'Development Lead',
-              office: 'New York',
-              age: '30',
-              date: '2011/09/03',
-              salary: '$345'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Yuri Berry',
-              position: 'Chief Marketing Officer (CMO)',
-              office: 'New York',
-              age: '40',
-              date: '2009/06/25',
-              salary: '$675'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Caesar Vance',
-              position: 'Pre-Sales Support',
-              office: 'New York',
-              age: '21',
-              date: '2011/12/12',
-              salary: '$106'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Doris Wilder',
-              position: 'Sales Assistant',
-              office: 'Sidney',
-              age: '23',
-              date: '2010/09/20',
-              salary: '$85'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Angelica Ramos',
-              position: 'Chief Executive Officer (CEO)',
-              office: 'London',
-              age: '47',
-              date: '2009/10/09',
-              salary: '$1'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Gavin Joyce',
-              position: 'Developer',
-              office: 'Edinburgh',
-              age: '42',
-              date: '2010/12/22',
-              salary: '$92'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jennifer Chang',
-              position: 'Regional Director',
-              office: 'Singapore',
-              age: '28',
-              date: '2010/11/14',
-              salary: '$357'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Brenden Wagner',
-              position: 'Software Engineer',
-              office: 'San Francisco',
-              age: '28',
-              date: '2011/06/07',
-              salary: '$206'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Fiona Green',
-              position: 'Chief Operating Officer (COO)',
-              office: 'San Francisco',
-              age: '48',
-              date: '2010/03/11',
-              salary: '$850'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Shou Itou',
-              position: 'Regional Marketing',
-              office: 'Tokyo',
-              age: '20',
-              date: '2011/08/14',
-              salary: '$163'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Michelle House',
-              position: 'Integration Specialist',
-              office: 'Sidney',
-              age: '37',
-              date: '2011/06/02',
-              salary: '$95'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Suki Burks',
-              position: 'Developer',
-              office: 'London',
-              age: '53',
-              date: '2009/10/22',
-              salary: '$114'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Prescott Bartlett',
-              position: 'Technical Author',
-              office: 'London',
-              age: '27',
-              date: '2011/05/07',
-              salary: '$145'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Gavin Cortez',
-              position: 'Team Leader',
-              office: 'San Francisco',
-              age: '22',
-              date: '2008/10/26',
-              salary: '$235'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Martena Mccray',
-              position: 'Post-Sales support',
-              office: 'Edinburgh',
-              age: '46',
-              date: '2011/03/09',
-              salary: '$324'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Unity Butler',
-              position: 'Marketing Designer',
-              office: 'San Francisco',
-              age: '47',
-              date: '2009/12/09',
-              salary: '$85'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Howard Hatfield',
-              position: 'Office Manager',
-              office: 'San Francisco',
-              age: '51',
-              date: '2008/12/16',
-              salary: '$164'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Hope Fuentes',
-              position: 'Secretary',
-              office: 'San Francisco',
-              age: '41',
-              date: '2010/02/12',
-              salary: '$109'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Vivian Harrell',
-              position: 'Financial Controller',
-              office: 'San Francisco',
-              age: '62',
-              date: '2009/02/14',
-              salary: '$452'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Timothy Mooney',
-              position: 'Office Manager',
-              office: 'London',
-              age: '37',
-              date: '2008/12/11',
-              salary: '$136'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jackson Bradshaw',
-              position: 'Director',
-              office: 'New York',
-              age: '65',
-              date: '2008/09/26',
-              salary: '$645'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Olivia Liang',
-              position: 'Support Engineer',
-              office: 'Singapore',
-              age: '64',
-              date: '2011/02/03',
-              salary: '$234'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Bruno Nash',
-              position: 'Software Engineer',
-              office: 'London',
-              age: '38',
-              date: '2011/05/03',
-              salary: '$163'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Sakura Yamamoto',
-              position: 'Support Engineer',
-              office: 'Tokyo',
-              age: '37',
-              date: '2009/08/19',
-              salary: '$139'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Thor Walton',
-              position: 'Developer',
-              office: 'New York',
-              age: '61',
-              date: '2013/08/11',
-              salary: '$98'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Finn Camacho',
-              position: 'Support Engineer',
-              office: 'San Francisco',
-              age: '47',
-              date: '2009/07/07',
-              salary: '$87'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Serge Baldwin',
-              position: 'Data Coordinator',
-              office: 'Singapore',
-              age: '64',
-              date: '2012/04/09',
-              salary: '$138'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Zenaida Frank',
-              position: 'Software Engineer',
-              office: 'New York',
-              age: '63',
-              date: '2010/01/04',
-              salary: '$125'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Zorita Serrano',
-              position: 'Software Engineer',
-              office: 'San Francisco',
-              age: '56',
-              date: '2012/06/01',
-              salary: '$115'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jennifer Acosta',
-              position: 'Junior Javascript Developer',
-              office: 'Edinburgh',
-              age: '43',
-              date: '2013/02/01',
-              salary: '$75'
+              name: 'Jonathan Collins',
+              userpic:'Jonathan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed',
+              date: 'Thu, 14 Feb 9:20 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Cara Stevens',
-              position: 'Sales Assistant',
-              office: 'New York',
-              age: '46',
-              date: '2011/12/06',
-              salary: '$145'
+              name: 'Gregory Anderson',
+              userpic:'Gregory.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Hermione Butler',
-              position: 'Regional Director',
-              office: 'London',
-              age: '47',
-              date: '2011/03/21',
-              salary: '$356'
+              name: 'Alcide Honoré',
+              userpic:'Alcide.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 8:05 AM',
+              duration: '39 m 17 s',
+              billstatus: 'alarm_on',
+              fee: '$ 127.53',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Lael Greer',
-              position: 'Systems Administrator',
-              office: 'London',
-              age: '21',
-              date: '2009/02/27',
-              salary: '$103'
+              name: 'Logan Ellis',
+              userpic:'logan.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Jonas Alexander',
-              position: 'Developer',
-              office: 'San Francisco',
-              age: '30',
-              date: '2010/07/14',
-              salary: '$86'
+              name: 'Armond Honoré',
+              userpic:'Armond.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Shad Decker',
-              position: 'Regional Director',
-              office: 'Edinburgh',
-              age: '51',
-              date: '2008/11/13',
-              salary: '$183'
+              name: 'Choco Hong',
+              userpic:'Choco.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_received',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '12 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 1.16',
+              rate: '$30',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Michael Bruce',
-              position: 'Javascript Developer',
-              office: 'Singapore',
-              age: '29',
-              date: '2011/06/27',
-              salary: '$183'
+              name: 'Jiawei Sun',
+              userpic:'Jiawei.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_missed_outgoing',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '0 sec',
+              billstatus: 'alarm_off',
+              fee: '$ 0',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             },
             {
-              name: 'Donna Snider',
-              position: 'Customer Support',
-              office: 'New York',
-              age: '27',
-              date: '2011/01/25',
-              salary: '$112'
+              name: 'Aaron Honoré',
+              userpic:'Aaron.png',
+              phone:'(123) 456-7890',
+              callstatus: 'call_made',
+              date: 'Thu, 14 Feb 9:31 AM',
+              duration: '6 sec',
+              billstatus: 'alarm_on',
+              fee: '$ 0.58',
+              rate: '$ 350',
+              expand: [ {
+                fieldA: 'Leave him a text about the coffee project...',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '5 m, 12 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: '3 m, 47 s',
+                fieldB: '06/26/20 10:35 AM'
+              }, {
+                fieldA: 'Sign Document',
+                fieldB: '06/26/20 10:35 AM'
+              } ]
             }
           ]
         }
@@ -657,7 +1492,41 @@ export default class Calllog extends React.Component {
   }
 
   userPic(cell, row) {   // String example
-    return `<img src=${ require("../../assets/images/logan.png")} alt="userPic" class="userPic"/> ${cell}<p class="userPhone">(123) 456-7890</p>`;
+    return `<img src=${ require("../../assets/images/logan.png")} alt="userPic" class="userPic"/><p class="username">${row.name}</p><img src=${ require("../../assets/images/voicepulse.png")} alt="userPic" class="voicepulse"/><span class="userfiledoc"><i class="mdi mdi-file-document"></i></span><p class="userPhone">${row.phone}</p>`;
+  }
+  userCallStatus(cell, row) {   // String example
+    
+    {/* <i class="mdi mdi-call-missed"></i>
+    <i class="mdi mdi-call-made"></i>
+    <i class="mdi mdi-call-received"></i>
+    <i class="mdi mdi-alarm-check"></i>
+    <i class="mdi mdi-alarm-off"></i> */}
+    if (row.callstatus=="call_missed") {
+      return `<span class="misscall"><i class="mdi mdi-call-missed"></i></span>`;
+    } else if (row.callstatus=="call_received") {
+      return `<span class="callreceive"><i class="mdi mdi-call-received"></i></span>`;
+    } else if (row.callstatus=="call_made") {
+      return `<span class="callmade"><i class="mdi mdi-call-made"></i></span>`;
+    } else {
+      return `<span class="missoutgoing"><i class="mdi mdi-call-missed"></i></span>`;
+    }
+  }
+  userBillStatus(cell, row) {
+    if (row.billstatus=="alarm_on") {
+      return `<span class="alarmon"><i class="mdi mdi-alarm-check"></i></span>`;
+    } else {
+      return `<span class="alarmoff"><i class="mdi mdi-alarm-off"></i></span>`;
+    }
+  }
+  userFee(cell, row) {
+    if (row.billstatus=="alarm_on") {
+      return `<span class="feeamt">${row.fee}</span>`;
+    } else {
+      return `<span class="feezero">${row.fee}</span>`;
+    }
+  }
+  userRate(cell, row) {
+    return `<span class="rateamt">${row.rate}</span>`;
   }
   render() {
     const options = {
@@ -673,12 +1542,12 @@ export default class Calllog extends React.Component {
         expandableRow={ this.isExpandableRow }
         expandComponent={ this.expandComponent } trClassName={ this.trClassFormat }>
         <TableHeaderColumn dataField='name' isKey={ true } width="150" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userPic}>Callers</TableHeaderColumn>
-        <TableHeaderColumn dataField='position' width="270" dataSort={ true } className={ this.customtdallClass }> Call Status</TableHeaderColumn>
+        <TableHeaderColumn dataField='' width="270" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userCallStatus}> Call Status</TableHeaderColumn>
         <TableHeaderColumn dataField='date' width="150" dataSort={ true } className={ this.customtdallClass }>Time & Date</TableHeaderColumn>
-        <TableHeaderColumn dataField='age' width="100" dataSort={ true } className={ this.customtdallClass }>Duration</TableHeaderColumn>
-        <TableHeaderColumn dataField='office' width="200" dataSort={ true } className={ this.customtdallClass }>Bill Status</TableHeaderColumn>
-        <TableHeaderColumn dataField='salary' width="100" dataSort={ true } className={ this.customtdallClass }>Fee</TableHeaderColumn>
-        <TableHeaderColumn dataField='salary' width="100" dataSort={ true } className={ this.customtdallClass }>Rate</TableHeaderColumn>
+        <TableHeaderColumn dataField='duration' width="100" dataSort={ true } className={ this.customtdallClass }>Duration</TableHeaderColumn>
+        <TableHeaderColumn dataField='' width="200" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userBillStatus}>Bill Status</TableHeaderColumn>
+        <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userFee}>Fee</TableHeaderColumn>
+        <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userRate}>Rate</TableHeaderColumn>
       </BootstrapTable>
       
     );

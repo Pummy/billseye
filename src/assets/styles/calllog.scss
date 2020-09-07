@@ -1,17 +1,101 @@
+span.misscall i{
+    color: rgba(255, 54, 54, 0.78);
+    font-size: 18px;
+}
+span.alarmoff {
+    background: #FFFFFF;
+    box-shadow: 5px 5px 15px rgba(218, 218, 218, 0.5);
+    border-radius: 10px;
+}
+.alarmoff i{
+    color:#EB5545;
+    font-size: 20px;
+}
+.feezero{
+    color: #EB5545;
+    font-family: Futura;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.rateamt{
+    font-family: Futura;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #7BAFFD;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+span.callreceive i{
+    color: #7BAFFD;
+    font-size: 18px;
+}
+.alarmon{
+    background: #FFFFFF;
+    box-shadow: 5px 5px 15px rgba(218, 218, 218, 0.5);
+    border-radius: 10px;
+}
+.alarmon i{
+    color: #4EF185;
+    font-size: 20px;
+}
+.feeamt{
+    font-family: Futura;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #4EF185;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+span.callmade i{
+    color: #7BAFFD;
+    font-size: 18px;
+}
+span.missoutgoing i{
+    color: rgba(255, 54, 54, 0.78);
+    font-size: 18px;
+}
+
 .btn-secondary.dropdown-toggle{
     background-color: #7BAFFD !important;
 }
 .btn-secondary.dropdown-toggle:hover, .btn-secondary.dropdown-toggle:focus{
     background-color: #7BAFFD !important;
 }
-table.table.my-expand {
-    display: flex;
-    width: 0;
-}
+// table.table.my-expand {
+    
+//     // display: flex;
+//     // width: 0;
+// }
 img.userPic {
     width: 25px !important;
     height: 20px !important;
     display: -webkit-inline-box;
+}
+p.username {
+    position: relative;
+    display: contents;
+}
+.voicepulse {
+    height: 15px !important;
+    width: 12px !important;
+    margin-left: 2px;
+}
+.userfiledoc i{
+    position: relative;
+    color: #7BAFFD;
 }
 p.userPhone {
     font-style: normal;
@@ -27,27 +111,58 @@ tr.custom-trall-expand{
     // box-shadow: 5px 5px 15px rgba(218, 218, 218, 0.5);
     padding: 10px;
     // background: #f3f4fa;
-    display: flex;
+    // display: flex;
 }
 tr.custom-trall-expand td{
     background: #FFFFFF !important;
-    width: -webkit-fill-available !important;
+    // width: -webkit-fill-available !important;
 }
-th.input-voice {
-    position: absolute;
-    transform: translate(18px, 352px);
+.inputvoice {
+    // position: absolute;
+    // transform: translate(18px, 352px);
     border-bottom: none !important;
+    margin: 10px 0 6px 17px;
 }
 input.inputstyle {
-    width: 460px;
+    width: 82%;
     height: 29px;
     background: linear-gradient(91.85deg, #7BB7FD 0.02%, #5D4FB5 81.13%);
     border-radius: 20px;
     border: 1px solid #7BAFFD;
-    padding: 0 14px;
+    padding: 0 30px 0 14px;
+    color: #ffffff;
+    
+}
+input.inputstyle::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #ffffff;
+    text-align: right;
+    padding-right: 0px;
+}
+input.inputstyle::-moz-placeholder { /* Firefox 19+ */
     color: #ffffff;
 }
-
+input.inputstyle:-ms-input-placeholder { /* IE 10+ */
+    color: #ffffff;
+}
+input.inputstyle:-moz-placeholder { /* Firefox 18- */
+    color: #ffffff;
+}
+.voicechat span i{
+    color: #ffffff;
+    position: absolute;
+    margin: 4px -26px;
+    font-size: 20px;
+}
+.voicechat .icuploader i{
+    position: absolute;
+    color: #7BAFFD;
+    box-shadow: 2px 2px 5px #DADADA;
+    border-radius: 50%;
+    align-items: center;
+    text-align: center;
+    font-size: 35px;
+    margin: -5px 10px;
+}
 .custom-trall-class{
     display: flex;
     box-shadow: 5px 5px 15px rgba(218, 218, 218, 0.5);

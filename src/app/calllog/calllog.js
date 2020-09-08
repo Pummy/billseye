@@ -1,8 +1,8 @@
 /* eslint max-len: 0 */
-import React,{Component} from 'react';
+import React,{Component,useState} from 'react';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../assets/styles/calllog.scss';
-
 
 class BSTable extends React.Component {
 
@@ -73,1407 +73,1428 @@ class BSTable extends React.Component {
 }
 
 
+const now = new Date();
+
+const ariaLabelProps = {
+  calendarAriaLabel: 'Toggle calendar',
+  clearAriaLabel: 'Clear value',
+  dayAriaLabel: 'Day',
+  monthAriaLabel: 'Month',
+  nativeInputAriaLabel: 'Date',
+  yearAriaLabel: 'Year',
+};
+
+const placeholderProps = {
+  dayPlaceholder: 'dd',
+  monthPlaceholder: 'mm',
+  yearPlaceholder: 'yyyy',
+};
+
+
+
 export default class Calllog extends React.Component {
 
-    state = {
-        datas: {
-          columns: [
-            {
-              label: 'Callers',
-              field: 'name',
-              width: 150,
-              attributes: {
-                'aria-controls': 'DataTable',
-                'aria-label': 'Name'
-              }
-            },
-            {
-              label: 'Call Status',
-              field: 'callstatus',
-              width: 270
-            },
-            {
-              label: 'Time & Date',
-              field: 'date',
-              sort: 'disabled',
-              width: 150
-            },
-            {
-              label: 'Duration',
-              field: 'duration',
-              sort: 'asc',
-              width: 100
-            },
-            {
-              label: 'Bill Status',
-              field: 'billstatus',
-              width: 200
-            },
-            {
-              label: 'Fee',
-              field: 'fee',
-              sort: 'disabled',
-              width: 100
-            },
-            {
-              label: 'Rate',
-              field: 'rate',
-              sort: 'disabled',
-              width: 100
-            }
-          ],
-          rows: [
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jonathan Collins',
-              userpic:'Jonathan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed',
-              date: 'Thu, 14 Feb 9:20 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Gregory Anderson',
-              userpic:'Gregory.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Alcide Honoré',
-              userpic:'Alcide.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 8:05 AM',
-              duration: '39 m 17 s',
-              billstatus: 'alarm_on',
-              fee: '$ 127.53',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Logan Ellis',
-              userpic:'logan.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Armond Honoré',
-              userpic:'Armond.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Choco Hong',
-              userpic:'Choco.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_received',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '12 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 1.16',
-              rate: '$30',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Jiawei Sun',
-              userpic:'Jiawei.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_missed_outgoing',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '0 sec',
-              billstatus: 'alarm_off',
-              fee: '$ 0',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            },
-            {
-              name: 'Aaron Honoré',
-              userpic:'Aaron.png',
-              phone:'(123) 456-7890',
-              callstatus: 'call_made',
-              date: 'Thu, 14 Feb 9:31 AM',
-              duration: '6 sec',
-              billstatus: 'alarm_on',
-              fee: '$ 0.58',
-              rate: '$ 350',
-              expand: [ {
-                fieldA: 'Leave him a text about the coffee project...',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '5 m, 12 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: '3 m, 47 s',
-                fieldB: '06/26/20 10:35 AM'
-              }, {
-                fieldA: 'Sign Document',
-                fieldB: '06/26/20 10:35 AM'
-              } ]
-            }
-          ]
-        }
-      };
 
-  constructor(props) {
-    super(props);
-  }
+  state = {
+    datas: {
+      columns: [
+        {
+          label: 'Callers',
+          field: 'name',
+          width: 150,
+          attributes: {
+            'aria-controls': 'DataTable',
+            'aria-label': 'Name'
+          }
+        },
+        {
+          label: 'Call Status',
+          field: 'callstatus',
+          width: 270
+        },
+        {
+          label: 'Time & Date',
+          field: 'date',
+          sort: 'disabled',
+          width: 150
+        },
+        {
+          label: 'Duration',
+          field: 'duration',
+          sort: 'asc',
+          width: 100
+        },
+        {
+          label: 'Bill Status',
+          field: 'billstatus',
+          width: 200
+        },
+        {
+          label: 'Fee',
+          field: 'fee',
+          sort: 'disabled',
+          width: 100
+        },
+        {
+          label: 'Rate',
+          field: 'rate',
+          sort: 'disabled',
+          width: 100
+        }
+      ],
+      rows: [
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jonathan Collins',
+          userpic:'Jonathan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed',
+          date: 'Thu, 14 Feb 9:20 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Gregory Anderson',
+          userpic:'Gregory.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Alcide Honoré',
+          userpic:'Alcide.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 8:05 AM',
+          duration: '39 m 17 s',
+          billstatus: 'alarm_on',
+          fee: '$ 127.53',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Logan Ellis',
+          userpic:'logan.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Armond Honoré',
+          userpic:'Armond.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Choco Hong',
+          userpic:'Choco.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_received',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '12 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 1.16',
+          rate: '$30',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Jiawei Sun',
+          userpic:'Jiawei.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_missed_outgoing',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '0 sec',
+          billstatus: 'alarm_off',
+          fee: '$ 0',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        },
+        {
+          name: 'Aaron Honoré',
+          userpic:'Aaron.png',
+          phone:'(123) 456-7890',
+          callstatus: 'call_made',
+          date: 'Thu, 14 Feb 9:31 AM',
+          duration: '6 sec',
+          billstatus: 'alarm_on',
+          fee: '$ 0.58',
+          rate: '$ 350',
+          expand: [ {
+            fieldA: 'Leave him a text about the coffee project...',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '5 m, 12 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: '3 m, 47 s',
+            fieldB: '06/26/20 10:35 AM'
+          }, {
+            fieldA: 'Sign Document',
+            fieldB: '06/26/20 10:35 AM'
+          } ]
+        }
+      ]
+    },
+    value: now
+  };
+    
+    
+  onChange = value => this.setState({ value })
+   
   trClassFormat() {
     // row is the current row data
     return "custom-trall-class";  // return class name.
@@ -1533,22 +1554,52 @@ export default class Calllog extends React.Component {
       expandRowBgColor: '#fff',
       defaultSortName: 'name',
     };
-    const { datas } = this.state;
+    const { datas,value } = this.state;
+
     return (
-      <BootstrapTable data={ datas.rows } tableBodyClass='my-custom'
-        options={ options }
-        search
-        pagination
-        expandableRow={ this.isExpandableRow }
-        expandComponent={ this.expandComponent } trClassName={ this.trClassFormat }>
-        <TableHeaderColumn dataField='name' isKey={ true } width="150" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userPic}>Callers</TableHeaderColumn>
-        <TableHeaderColumn dataField='' width="270" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userCallStatus}> Call Status</TableHeaderColumn>
-        <TableHeaderColumn dataField='date' width="150" dataSort={ true } className={ this.customtdallClass }>Time & Date</TableHeaderColumn>
-        <TableHeaderColumn dataField='duration' width="100" dataSort={ true } className={ this.customtdallClass }>Duration</TableHeaderColumn>
-        <TableHeaderColumn dataField='' width="200" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userBillStatus}>Bill Status</TableHeaderColumn>
-        <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userFee}>Fee</TableHeaderColumn>
-        <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userRate}>Rate</TableHeaderColumn>
-      </BootstrapTable>
+      <div>
+        <div>
+          <form onSubmit={ this.onFormSubmit }>
+              <DateRangePicker
+                {...ariaLabelProps}
+                {...placeholderProps}
+                onChange={this.onChange}
+                value={value}
+              />
+              {/* <DatePicker
+                calendarAriaLabel="Toggle calendar"
+                clearAriaLabel="Clear value"
+                dayAriaLabel="Day"
+                monthAriaLabel="Month"
+                nativeInputAriaLabel="Date"
+                onChange={ this.handleChange }
+                selected={ this.state.startDate }
+                value={this.state.startDate}
+                yearAriaLabel="Year"
+              /> */}
+          </form>
+        </div>
+
+
+        <div>
+          <BootstrapTable data={ datas.rows } tableBodyClass='my-custom'
+          options={ options }
+          search
+          pagination
+          expandableRow={ this.isExpandableRow }
+          expandComponent={ this.expandComponent } trClassName={ this.trClassFormat }>
+            <TableHeaderColumn dataField='name' isKey={ true } width="200" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userPic}>Callers</TableHeaderColumn>
+            <TableHeaderColumn dataField='' width="120" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userCallStatus}> Call Status</TableHeaderColumn>
+            <TableHeaderColumn dataField='date' width="200" dataSort={ true } className={ this.customtdallClass }>Time & Date</TableHeaderColumn>
+            <TableHeaderColumn dataField='duration' width="130" dataSort={ true } className={ this.customtdallClass }>Duration</TableHeaderColumn>
+            <TableHeaderColumn dataField='' width="120" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userBillStatus}>Bill Status</TableHeaderColumn>
+            <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userFee}>Fee</TableHeaderColumn>
+            <TableHeaderColumn dataField='' width="100" dataSort={ true } className={ this.customtdallClass } dataFormat={this.userRate}>Rate</TableHeaderColumn>
+          </BootstrapTable>
+
+        </div>
+      </div>
+      
       
     );
   }
